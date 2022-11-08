@@ -2029,10 +2029,10 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@unfolded/map-sdk@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@unfolded/map-sdk/-/map-sdk-1.4.0.tgz#75b75d7bdb23ee020114a2ca1e7437d8215e48a6"
-  integrity sha512-G2uHOD58y+FFLym5V4WFBX8wuCz16B6vWLZxpbaKZJA9avK4uvhELP2jzBHpITuQIGa79VaYvkRTRnHmkp/GNA==
+"@unfolded/map-sdk@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@unfolded/map-sdk/-/map-sdk-1.5.2.tgz#3d63e881b6019b4980c89e0313432a84350f1592"
+  integrity sha512-d3Jhsr7YutGmzq3Db/ex84CSjNLMjEiaA+GOV+ReshjbpWfBLuu//KMkNE/b+MePuT2sBvgAcWANSfXS6ptoGg==
   dependencies:
     "@types/geojson" "^7946.0.10"
     csstype "^3.1.0"

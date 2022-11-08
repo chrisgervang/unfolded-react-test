@@ -3,13 +3,17 @@ import {createMap} from '@unfolded/map-sdk';
 
 import './App.scss';
 
+function UnfoldedDeckGl({libs, deckProps}) {
+  return <libs.deck.DeckGL {...deckProps}/>
+}
+
 function App() {
   const [map, setMap] = useState(null);
   const [layers, setLayers] = useState([]);
   const [layerResult, setLayerResult] = useState('');
 
   const [_deckProps, setDeckProps] = useState({});
-  const [deckLib, setDeckLib] = useState(undefined);
+  const [libs, setLibs] = useState(undefined);
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,22 +31,22 @@ function App() {
     loadData();
   }, [map]);
 
-  const onDeckLoad = useCallback(({deck}) => {
-    console.log("onDeckLoad", {deck});
-    setDeckLib(deck)
+  const onDeckLoad = useCallback((libs) => {
+    console.log("onDeckLoad", libs);
+    setLibs(libs)
   }, [])
   
   const onDeckRender = useCallback((
     deckProps,
-    { deck, layersRenderData, layerTimeline, mapIndex }
+    onRenderLibs
   ) => {
-    console.log("onDeckRender", deckProps)
+    console.log("props in onDeckRender", deckProps)
+    console.log("libs in onDeckRender", onRenderLibs)
     setDeckProps(deckProps)
     return deckProps;
   }, [])
 
-  console.log("_deckProps", _deckProps)
-  console.log("deckLib", deckLib)
+  console.log("libs", libs)
 
   const loadLayers = () => {
     const layers = map.getLayers();
@@ -108,6 +112,7 @@ function App() {
   return (
     <div className="App">
       <UnfoldedMap setMap={setMap} onDeckRender={onDeckRender} onDeckLoad={onDeckLoad} />
+      {libs && <UnfoldedDeckGl libs={libs} deckProps={_deckProps} />}
       <div className="sidemenu">
         {!map ? (
           <div id="loader" />
@@ -170,6 +175,7 @@ function UnfoldedMap({setMap, onDeckLoad, onDeckRender}) {
   useEffect(() => {
     const loadMap = async () => {
       const mapInstance = await createMap({
+        container: mountContainerRef?.current,
         eventHandlers: {
           _onDeckLoad: onDeckLoad,
           _onDeckRender: onDeckRender,
